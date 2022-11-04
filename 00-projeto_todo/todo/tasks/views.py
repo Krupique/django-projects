@@ -2,9 +2,12 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.http import HttpResponse
+from django.contrib import messages
+import datetime
+
 from .forms import TaskForm
 from .models import Task
-from django.contrib import messages
+
 
 def helloWorld(request):
     return HttpResponse('Hello World')
@@ -17,6 +20,9 @@ def taskList(request):
 
     search = request.GET.get('search')
     filter = request.GET.get('filter')
+    taskDoneRecently = Task.objects.filter(done='done', updated_at__gt=datetime.datetime.now() - datetime.timedelta(days=30), user=request.user).count()
+    taskDone = Task.objects.filter(done='done', user=request.user).count()
+    taskDoing = Task.objects.filter(done='doing', user=request.user).count()
 
     if search:
         tasks = Task.objects.filter(title__icontains=search, user=request.user)
@@ -33,7 +39,8 @@ def taskList(request):
 
         tasks = paginator.get_page(page)
 
-    return render(request, 'tasks/list.html', {'tasks': tasks})
+    return render(request, 'tasks/list.html', {'tasks': tasks, 'taskDoneRecently': taskDoneRecently, \
+        'taskDone': taskDone, 'taskDoing': taskDoing})
 
 @login_required
 def taskView(request, id):

@@ -5,22 +5,48 @@
 {% block content %}
 <div class="offset-1 col-10 list-div">
     <h1>Lista de Tarefas</h1>
+
     
-    <a id="add-link" href="newtask/">
-        <div class="col-2 add-div">
-            <i class="fas fa-plus"></i> add task
+    <div class="container dashboard ">
+        <div class="col-4 dashboard-box" id="dashboard-lastdays">
+            <h4>Finalizadas nos últimos 30 dias</h4>
+            <span>{{taskDoneRecently}}</span>
         </div>
-    </a>
         
-    <div class="col-9 search-div">
-        <form method="GET" id="search-form">
-            <span>
-                <input class="form-control col-6" type="text" id="search" name="search" placeholder="Digite o nome da tarefa para buscar" value="{{ request.GET.search }}">
-                <i class="fas fa-search" id="search-btn"></i>
-            </span>
-        </form>
+        <div class="col-4 dashboard-box" id="dashboard-done">
+            <h4>Tarefas Finalizadas</h4>
+            <span>{{taskDone}}</span>
+        </div>
+
+        <div class="col-4 dashboard-box" id="dashboard-doing">
+            <h4>Tarefas para fazer</h4>
+            <span>{{taskDoing}}</span>
+        </div>
+
     </div>
 
+    
+    <div class="div-search-add">
+    
+        <div class="div-add">
+            <a id="add-link" href="newtask/">
+                <div class="col-12 add-div">
+                    <i class="fas fa-plus"></i> add task
+                </div>
+            </a>
+        </div>
+            
+        <div class="search-div">
+            <form method="GET" id="search-form">
+                <input class="form-control col-6" type="text" id="search" name="search" placeholder="Digite o nome da tarefa para buscar" value="{{ request.GET.search }}">
+                <i class="fas fa-search" id="search-btn"></i>
+                
+            </form>
+        </div>
+
+
+    </div>
+    
     <div class="col-12 filter-div">
         <span>Filtrar por:</span>
         <select name="filter" id="filter" class="form-control">
@@ -28,8 +54,9 @@
             <option value="done">Tarefas concluídas</option>
             <option value="doing">Tarefas a fazer</option>
         </select>
-
+        
     </div>
+    
 
     {% if messages %}
         <ul class="messages">
