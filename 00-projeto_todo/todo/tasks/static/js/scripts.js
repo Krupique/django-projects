@@ -1,22 +1,22 @@
-$(document).ready(function() {
-    
+$(document).ready(function(){
+    console.log('Teste');
+
     var deleteBtn = $('.delete-btn');
     var searchBtn = $('#search-btn');
     var searchForm = $('#search-form');
 
     $(deleteBtn).on('click', function(e){
-        
         e.preventDefault();
 
-        var delLink = $(this).attr('href');
-        var result = confirm('Quer deletear esta tarefa?')
+        var dellink = $(this).attr('href');
+        var result = confirm('Quer deletar esta tarefa?');
 
         if(result){
-            window.location.href = delLink;
+            window.location.href = dellink;
         }
-    })
+    });
 
-    $(searchBtn).on('click', function() {
-        searchBtn.submit();
+    $(searchBtn).on('click', function(){
+        searchForm.submit();
     })
 })

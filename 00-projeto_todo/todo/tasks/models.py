@@ -1,16 +1,15 @@
 from django.db import models
 
 class Task(models.Model):
-
     STATUS = (
-        ('doing', 'Doing'),
-        ('done', 'Done')
+        ('doing', 'doing'),
+        ('done', 'done')
     )
 
     title = models.CharField(max_length=255)
-    description = models.TextField(max_length=255)
+    description = models.TextField()
     done = models.CharField(
-        max_length=5,
+        max_length=5, 
         choices=STATUS
     )
 
@@ -19,5 +18,3 @@ class Task(models.Model):
 
     def __str__(self):
         return self.title
-
-

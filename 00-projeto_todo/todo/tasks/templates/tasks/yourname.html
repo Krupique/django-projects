@@ -1,7 +1,11 @@
-{% extends 'base.html' %}
 
-{% block title%}Title - Qual é o seu nome{% endblock %}
+
+{% extends 'base.html'%}
+
+{% block title %} <h1>O seu nome é: {{name}}</h1> {% endblock %}
 
 {% block content %}
+
 <h1>O seu nome é: {{name}}</h1>
+
 {% endblock %}
