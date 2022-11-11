@@ -13,6 +13,8 @@ model = joblib.load('ml_model/modelPipeline-1.pkl')
 
 def scoreJson(request):
 
+    print('Chegou aqui')
+
     data = json.loads(request.body)
 
     dataframe = pd.DataFrame({0: data}).T
@@ -20,6 +22,7 @@ def scoreJson(request):
     score = model.predict_proba(dataframe)[:, -1][0]
     score = float(score)
 
+    print(f'Score: {score}')
     return JsonResponse({'score': score})
 
 def scoreFile(request):
